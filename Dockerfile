@@ -15,12 +15,25 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 #Install C/C++ Compiler
-RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
-RUN apt-get update -y
-RUN apt-get install -y gcc-4.8
-RUN apt-get install -y g++-4.8
-RUN ln -f -s /usr/bin/gcc-4.8 /usr/bin/gcc
-RUN ln -f -s /usr/bin/g++-4.8 /usr/bin/g++
+#RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
+#RUN apt-get update -y
+#RUN apt-get install -y gcc-4.8
+#RUN apt-get install -y g++-4.8
+#RUN ln -f -s /usr/bin/gcc-4.8 /usr/bin/gcc
+#RUN ln -f -s /usr/bin/g++-4.8 /usr/bin/g++
+
+
+#Install C/C++ Compiler
+RUN apt-get update && \
+RUN apt-get install build-essential software-properties-common -y && \
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
+RUN apt-get update && \
+RUN apt-get install gcc-snapshot -y && \
+RUN apt-get update && \
+RUN apt-get install gcc-6 g++-6 -y && \
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6 && \
+RUN apt-get install gcc-4.8 g++-4.8 -y && \
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
 
 #Install Java Compiler
 RUN add-apt-repository -y ppa:openjdk-r/ppa  
