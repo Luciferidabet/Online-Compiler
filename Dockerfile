@@ -18,9 +18,9 @@ RUN apt-get update && \
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 RUN apt-get update -y
 RUN apt-get install -y gcc-4.8
-RUN apt-get install -y g++-4.8
+RUN apt-get install -y g++
 RUN ln -f -s /usr/bin/gcc-4.8 /usr/bin/gcc
-RUN ln -f -s /usr/bin/g++-4.8 /usr/bin/g++
+RUN ln -f -s /usr/bin/g++ /usr/bin/g++
 
 
 #Install C/C++ Compiler
