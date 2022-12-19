@@ -38,7 +38,15 @@ RUN ln -f -s /usr/bin/g++ /usr/bin/g++
 #Install Java Compiler
 RUN add-apt-repository -y ppa:openjdk-r/ppa  
 RUN apt-get update -y  
-RUN apt install -y openjdk-8-jre
+FROM nginx:latest
+
+RUN mkdir -p /usr/share/man/man1
+
+RUN apt-get update -y && apt-get install -y \
+    unzip \
+    wget \
+    default-jre \
+    nginx
 RUN apt-get install -y default-jdk
 
 #Install applications
