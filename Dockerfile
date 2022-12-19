@@ -18,25 +18,14 @@ RUN apt-get update && \
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 RUN apt-get update -y
 RUN apt-get install -y gcc-4.8
-RUN apt-get install -y g++
+RUN apt-get install -y g++-4.8
 RUN ln -f -s /usr/bin/gcc-4.8 /usr/bin/gcc
-RUN ln -f -s /usr/bin/g++ /usr/bin/g++
+RUN ln -f -s /usr/bin/g++-4.8 /usr/bin/g++
 
 #Install Java Compiler
 RUN add-apt-repository -y ppa:openjdk-r/ppa  
 RUN apt-get update -y  
-
-FROM nginx:latest
-
-RUN mkdir -p /usr/share/man/man1
-
-RUN apt-get update -y && apt-get install -y \
-    unzip \
-    wget \
-    default-jre \
-    nginx
-
-RUN apt-get install -y openjdk-11-jre
+RUN apt install -y openjdk-8-jre
 RUN apt-get install -y default-jdk
 
 #Install applications
@@ -59,7 +48,7 @@ EXPOSE 80
 CMD /usr/sbin/apache2ctl -D FOREGROUND
 
 #Copy files to webserver 
-COPY Online-Compiler-master /var/www/html/
+COPY Online-Compiler /var/www/html/
 
 #Change Permission
 RUN chmod -R 777 /var/www/html/
